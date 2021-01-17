@@ -1,0 +1,25 @@
+.wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 42px 24px;
+}
+
+.product {
+  padding: 24px;
+  font-size: 1.5rem;
+}
+
+.product__Row {
+  display: flex;
+  align-items: center;
+}
+
+.product__ColImg,
+.product__Col {
+  flex: 1;
+}
+
+.product__ColImg {
+  max-width: 50px;
+  margin-right: 25px;
+}
