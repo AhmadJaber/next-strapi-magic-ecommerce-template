@@ -1,0 +1,9 @@
+.wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 42px 24px;
+}
+
+.wrapper h3 {
+  margin-top: 1.5rem;
+}
