@@ -1,26 +1,3 @@
-# next-strapi-magic-ecommerce-template
-
-a basic template for creating an e-commerce website with strapi, nextjs, magic
-
-### stacks
-
-**nextjs**
-The React Framework for Production.
-Next.js gives you the best developer experience with all the features you need for production:
--> hybrid static & server rendering,
--> TypeScript support,
--> smart bundling,
--> route pre-fetching
-
-**strapi**
-Strapi is a flexible, open-source Headless CMS that gives developers the freedom to choose their favorite tools and frameworks while also allowing editors to easily manage and distribute their content.
-
-**stripe**
-Online payment processing for internet businesses. Stripe is a suite of payment APIs that powers commerce for online businesses of all sizes
-
-**magic**
-One SDK for passwordless, WebAuthn, and social login - fully customizable.
-
 #### making authenticated request with strapi & magic
 
 -> to achieve that install a plugin in strapi, `strapi-plugin-magic` & customize some files in strapi-code(backend).

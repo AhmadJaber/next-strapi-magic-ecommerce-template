@@ -65,6 +65,15 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const getToken = async () => {
+    try {
+      const token = await magic.user.getIdToken();
+      return token;
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   useEffect(() => {
     magic = new Magic(MAGIC_PUBLIC_KEY);
     checkUserLoggedIn();
