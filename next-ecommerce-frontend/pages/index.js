@@ -6,9 +6,9 @@ import { twoDecimals } from '../utils/format';
 
 export default function Home({ products }) {
   return (
-    <div className={styles.wrapper}>
+    <div className='wrapper'>
       <Head>
-        <title>Create Next App</title>
+        <title>next e-commerce frontend</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
 

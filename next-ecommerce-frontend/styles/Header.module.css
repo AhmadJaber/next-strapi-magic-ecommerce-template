@@ -1,0 +1,26 @@
+.header {
+  max-width: 768px;
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.back {
+  color: tomato;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.header__title {
+  margin-top: 0;
+  padding: 0 1.5rem;
+  flex: 1;
+}
+
+.auth a {
+  display: inline-block;
+  color: tomato;
+  font-weight: 700;
+}

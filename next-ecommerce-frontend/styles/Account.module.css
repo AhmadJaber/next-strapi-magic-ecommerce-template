@@ -1,0 +1,21 @@
+.userinfo {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.userinfo span {
+  color: tomato;
+  font-weight: 700;
+}
+
+.btn {
+  width: 100%;
+  display: inline-block;
+  padding: 0.5em;
+  font-size: 1.25rem;
+  border: none;
+  border-radius: 4px;
+  background-color: tomato;
+  color: #000000;
+  text-align: center;
+}
