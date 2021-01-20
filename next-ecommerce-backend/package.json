@@ -22,7 +22,8 @@
     "strapi-plugin-magic": "^0.3.2",
     "strapi-plugin-upload": "3.4.3",
     "strapi-plugin-users-permissions": "3.4.3",
-    "strapi-utils": "3.4.3"
+    "strapi-utils": "3.4.3",
+    "stripe": "^8.131.1"
   },
   "author": {
     "name": "A Strapi developer"

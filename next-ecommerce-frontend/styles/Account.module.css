@@ -19,3 +19,12 @@
   color: #000000;
   text-align: center;
 }
+
+.order {
+  text-align: center;
+}
+
+.order__loading {
+  margin: 1rem auto;
+  width: 50px;
+}

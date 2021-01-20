@@ -3,10 +3,14 @@ import Link from 'next/link';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { emailToUserName } from '../utils/format';
+import { useOrders } from '../hooks/useOrders';
 import styles from '../styles/Account.module.css';
 
 export default function Account() {
-  const { user, logoutUser } = useContext(AuthContext);
+  const { user, logoutUser, getToken } = useContext(AuthContext);
+
+  const { orders, loading } = useOrders(user, getToken);
+  console.log('orders for user', orders);
 
   if (!user) {
     return (
@@ -27,7 +31,6 @@ export default function Account() {
       </Head>
 
       <h2 className='page-title'>Account Page</h2>
-
       <div className={styles.userinfo}>
         <p>
           logged in as: <span>{emailToUserName(user.email)}</span>
@@ -35,6 +38,25 @@ export default function Account() {
         <p>
           email: <span>{user.email}</span>
         </p>
+      </div>
+
+      <hr />
+
+      <div className={styles.order}>
+        <h3 className={styles.order__title}>Your Orders</h3>
+
+        {loading && (
+          <div className={styles.order__loading}>
+            <img src='/loader.gif' alt='loading your orders....' />
+          </div>
+        )}
+
+        {orders.map((order) => (
+          <div key={order.id}>
+            {new Date(order.created_at).toLocaleDateString('en-EN')}{' '}
+            {order.product.name} ${order.total} {order.status}
+          </div>
+        ))}
       </div>
 
       <a href='#' onClick={logoutUser} className={styles.btn}>
