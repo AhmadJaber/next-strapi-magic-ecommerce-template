@@ -1,9 +1,11 @@
 "use strict";
 
 const { sanitizeEntity } = require("strapi-utils");
-
-// require('stripe'), returns a function which will receive the STRIPE_SK
 const stripe = require("stripe")(process.env.STRIPE_SK);
+/**
+ * require('stripe'), returns a function which will receive the STRIPE_SK
+ * this way i am injecting the secret_key to stripe_sdk
+ */
 
 /**
  * given a dollar amount return the amount in cents
@@ -16,7 +18,6 @@ const fromDecimalToInt = (number) => parseInt(number * 100);
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/concepts/controllers.html#core-controllers)
  * to customize this controller
  */
-
 module.exports = {
   /**
    * Retrieve records.
@@ -61,6 +62,7 @@ module.exports = {
    */
   async create(ctx) {
     const { product } = ctx.request.body;
+    console.log("product", product);
 
     if (!product) {
       return ctx.throw(400, "Please specify a product");
@@ -76,6 +78,7 @@ module.exports = {
     const { user } = ctx.state;
     const BASE_URL = ctx.request.headers.origin || "http://localhost:3000";
 
+    // checkout_session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       customer_email: user.email,
@@ -85,7 +88,7 @@ module.exports = {
       line_items: [
         {
           price_data: {
-            currency: usd,
+            currency: "usd",
             product_data: {
               name: realProduct.name,
             },
@@ -95,5 +98,17 @@ module.exports = {
         },
       ],
     });
+
+    // create the order
+    const newOrder = await strapi.services.order.create({
+      user: user.id,
+      product: realProduct.id,
+      total: realProduct.price,
+      status: "unpaid",
+      checkout_session: session.id,
+    });
+
+    // we will use session.id in the frontend
+    return { id: session.id };
   },
 };

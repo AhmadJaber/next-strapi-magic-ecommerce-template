@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^1.11.0",
     "magic-sdk": "^4.0.2",
     "next": "10.0.5",
     "react": "17.0.1",

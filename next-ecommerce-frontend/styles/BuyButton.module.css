@@ -1,0 +1,11 @@
+.buy {
+  background-color: tomato;
+  color: #000000;
+  border-radius: 4px;
+  padding: 9px;
+  font-size: 18px;
+  font-weight: 700;
+  border: none;
+  margin-left: 1.5rem;
+  cursor: pointer;
+}
