@@ -111,4 +111,33 @@ module.exports = {
     // we will use session.id in the frontend
     return { id: session.id };
   },
+  /**
+   * given a checkout_session, verifies payment & update the order
+   * @param {any} ctx
+   */
+  async confirm(ctx) {
+    const { checkout_session } = ctx.request.body;
+    // retrive the session
+    const session = await stripe.checkout.sessions.retrieve(checkout_session);
+
+    if (session.payment_status === "paid") {
+      // strapi.services.order.update(filter_object, {values})
+      const updateOrder = await strapi.services.order.update(
+        {
+          checkout_session,
+        },
+        {
+          status: "paid",
+        }
+      );
+
+      return sanitizeEntity(updateOrder, { model: strapi.models.order });
+    } else {
+      // error can happen, because of the asynchoronous nature of apis
+      return ctx.throw(
+        400,
+        "The payment wan't successful, please call support"
+      );
+    }
+  },
 };

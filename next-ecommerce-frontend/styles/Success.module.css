@@ -1,0 +1,18 @@
+.success {
+  color: chartreuse;
+  text-align: center;
+}
+
+.order {
+  text-align: center;
+}
+
+.highlight {
+  color: tomato;
+  font-weight: 700;
+}
+
+.order__loading {
+  margin: 1rem auto;
+  width: 50px;
+}

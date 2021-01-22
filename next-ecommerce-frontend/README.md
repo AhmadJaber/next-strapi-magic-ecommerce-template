@@ -213,4 +213,39 @@ const handleBuy = async () => {
 };
 ```
 
-- then in `stripe hosted checkout` page, when we fill the card-number will be redirected to the `success` page with that `checkout_session token` & this gonna allow us to verify that the order is paid & set the `status` to paid.
+- then in `stripe_hosted checkout` page, when we fill the card-number will be redirected to the `success` page with that `checkout_session token` as `query_parameter` & this gonna allow us to verify that the order is paid & set the `status` to paid.
+
+#### confirmation page & update order -> status
+
+- `checkout_session token` as `query_parameter` which is attached to the order. so we use stripe-sdk to verify that checkout_session & update that order.
+- to do that will create a custom-controller for `order` collection.
+
+```js
+async confirm(ctx) {
+    const { checkout_session } = ctx.request.body;
+    // retrive the session
+    const session = await stripe.checkout.sessions.retrieve(checkout_session);
+
+    if (session.payment_status === "paid") {
+      // strapi.services.order.update(filter_object, {values})
+      const updateOrder = await strapi.services.order.update(
+        {
+          checkout_session,
+        },
+        {
+          status: "paid",
+        }
+      );
+
+      return sanitizeEntity(updateOrder, { model: strapi.models.order });
+    } else {
+      // error can happen, because of the asynchoronous nature of apis
+      return ctx.throw(
+        400,
+        "The payment wan't successful, please call support"
+      );
+    }
+  }
+```
+
+- in-order this api to work, i have to include it to `api/order/config/routes.json`.
